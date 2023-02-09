@@ -52,7 +52,7 @@ func main() {
 * [x] Edit
 * [x] Images
 * [x] Embeddings
-* [ ] Files
+* [x] Files
 * [ ] Fine-tunes
 * [ ] Moderations
 * [ ] Engines

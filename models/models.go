@@ -10,6 +10,9 @@ func NewClient(c *client.Client) *ModelClient {
 	return &ModelClient{c: c}
 }
 
+/*
+ * Lists the currently available models, and provides basic information about each one such as the owner and availability.
+ */
 func (c *ModelClient) List() (*ListResponse, error) {
 	data, err := c.c.DoJson("GET", "/models", nil)
 	if err != nil {
@@ -22,6 +25,10 @@ func (c *ModelClient) List() (*ListResponse, error) {
 	return &resp, nil
 }
 
+/*
+ * Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
+ * name: The ID of the model to use for this request
+ */
 func (c *ModelClient) Retrieve(name string) (*Model, error) {
 	data, err := c.c.DoJson("GET", "/models/"+name, nil)
 	if err != nil {

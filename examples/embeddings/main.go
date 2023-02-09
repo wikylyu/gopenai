@@ -16,7 +16,7 @@ func main() {
 
 	resp, err := openai.Embeddings.Create(&embeddings.CreateRequest{
 		Model: models.ModelTextEmbeddingAda002,
-		Input: "The food was delicious and the waiter...",
+		Input: "The food was delicious and the waiter...", // input can be string or array
 	})
 	if err != nil {
 		panic(err)

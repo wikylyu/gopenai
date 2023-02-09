@@ -10,7 +10,7 @@ type Error struct {
 }
 
 func (e *Error) Error() string {
-	return fmt.Sprintf(`[%s]:%s`, e.Code, e.Message)
+	return fmt.Sprintf(`[%s]:%s`, e.Type, e.Message)
 }
 
 type ErrorResponse struct {

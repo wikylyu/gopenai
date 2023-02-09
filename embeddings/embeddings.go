@@ -11,12 +11,15 @@ func NewClient(c *client.Client) *EmbeddingClient {
 	return &EmbeddingClient{c: c}
 }
 
+/*
+ * Creates an embedding vector representing the input text.
+ */
 func (c *EmbeddingClient) Create(req *CreateRequest) (*CreateResponse, error) {
 	switch req.Input.(type) {
 	case string, []string:
 		break
 	default:
-		return nil, fmt.Errorf("input should be string or array")
+		return nil, fmt.Errorf("input must be string or array")
 	}
 	data, err := c.c.DoJson("POST", "/embeddings", req)
 	if err != nil {

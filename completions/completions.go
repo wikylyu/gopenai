@@ -10,6 +10,9 @@ func NewClient(c *client.Client) *CompletionClient {
 	return &CompletionClient{c: c}
 }
 
+/*
+ * Creates a completion for the provided prompt and parameters
+ */
 func (c *CompletionClient) Create(req *CreateRequest) (*CreateResponse, error) {
 	data, err := c.c.DoJson("POST", "/completions", req)
 	if err != nil {

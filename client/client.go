@@ -8,6 +8,8 @@ import (
 	"mime/multipart"
 	"net/http"
 	"net/url"
+	"os"
+	"path/filepath"
 	"reflect"
 	"time"
 )
@@ -83,6 +85,30 @@ func (c *Client) do(req *http.Request) ([]byte, error) {
 	return data, nil
 }
 
+func (c *Client) Download(path string) (io.ReadCloser, error) {
+	req, err := c.getJsonRequest("GET", path, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != 200 {
+		defer resp.Body.Close()
+		data, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return nil, err
+		}
+		var e ErrorResponse
+		if err := json.Unmarshal(data, &e); err != nil {
+			return nil, err
+		}
+		return nil, &e.Error
+	}
+	return resp.Body, nil
+}
+
 func (c *Client) DoJson(method, path string, body interface{}) ([]byte, error) {
 	req, err := c.getJsonRequest(method, path, body)
 	if err != nil {
@@ -121,9 +147,9 @@ func (c *Client) getFormRequest(method, path string, body interface{}) (*http.Re
 				if value != "" {
 					writer.WriteField(key, value)
 				}
-			case io.Reader:
+			case *os.File:
 				if value != nil {
-					part, err := writer.CreateFormFile(key, key)
+					part, err := writer.CreateFormFile(key, filepath.Base(value.Name()))
 					if err != nil {
 						return nil, err
 					}

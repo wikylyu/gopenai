@@ -5,6 +5,7 @@ import (
 	"github.com/wikylyu/gopenai/completions"
 	"github.com/wikylyu/gopenai/edits"
 	"github.com/wikylyu/gopenai/embeddings"
+	"github.com/wikylyu/gopenai/files"
 	"github.com/wikylyu/gopenai/images"
 	"github.com/wikylyu/gopenai/models"
 )
@@ -18,5 +19,6 @@ func New(cfg *Config) *Session {
 		Edit:       edits.NewClient(client),
 		Image:      images.NewClient(client),
 		Embeddings: embeddings.NewClient(client),
+		Files:      files.NewClient(client),
 	}
 }
