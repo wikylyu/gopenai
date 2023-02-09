@@ -7,6 +7,8 @@ GOpenAPI provides their official python-like api.
 
 ## Usage
 
+### create completion
+
 ```golang
 package main
 
@@ -24,7 +26,7 @@ func main() {
 	})
 
 	prompt := "Say this is a test"
-	resp, err := openai.Completion.Create(&completions.CreateCompletionRequest{
+	resp, err := openai.Completion.Create(&completions.CreateRequest{
 		Model:       "text-davinci-003",
 		Prompt:      prompt,
 		MaxTokens:   256,
@@ -40,12 +42,15 @@ func main() {
 
 ```
 
+### For more usages, see ***examples/*** folder.
+
+
 ## API List
 
 * [x] Model
 * [x] Completion
 * [x] Edit
-* [ ] Images
+* [x] Images
 * [ ] Embeddings
 * [ ] Files
 * [ ] Fine-tunes

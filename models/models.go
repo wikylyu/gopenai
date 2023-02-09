@@ -6,16 +6,16 @@ import (
 	"github.com/wikylyu/gopenai/client"
 )
 
-func NewModelClient(c *client.Client) *ModelClient {
+func NewClient(c *client.Client) *ModelClient {
 	return &ModelClient{c: c}
 }
 
-func (c *ModelClient) List() (*ListModelsResponse, error) {
-	data, err := c.c.Do("GET", "/models", nil)
+func (c *ModelClient) List() (*ListResponse, error) {
+	data, err := c.c.DoJson("GET", "/models", nil)
 	if err != nil {
 		return nil, err
 	}
-	var resp ListModelsResponse
+	var resp ListResponse
 	if err := json.Unmarshal(data, &resp); err != nil {
 		return nil, err
 	}
@@ -23,7 +23,7 @@ func (c *ModelClient) List() (*ListModelsResponse, error) {
 }
 
 func (c *ModelClient) Retrieve(name string) (*Model, error) {
-	data, err := c.c.Do("GET", "/models/"+name, nil)
+	data, err := c.c.DoJson("GET", "/models/"+name, nil)
 	if err != nil {
 		return nil, err
 	}

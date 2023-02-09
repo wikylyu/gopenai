@@ -5,8 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"mime/multipart"
 	"net/http"
 	"net/url"
+	"reflect"
 	"time"
 )
 
@@ -36,7 +38,7 @@ func NewClient(endpoint, apikey string) *Client {
 	return c
 }
 
-func (c *Client) getRequest(method, path string, body interface{}) (*http.Request, error) {
+func (c *Client) getJsonRequest(method, path string, body interface{}) (*http.Request, error) {
 	fullurl, err := url.JoinPath(c.endpoint, path)
 	if err != nil {
 		return nil, err
@@ -58,11 +60,7 @@ func (c *Client) getRequest(method, path string, body interface{}) (*http.Reques
 	return req, nil
 }
 
-func (c *Client) Do(method, path string, body interface{}) ([]byte, error) {
-	req, err := c.getRequest(method, path, body)
-	if err != nil {
-		return nil, err
-	}
+func (c *Client) do(req *http.Request) ([]byte, error) {
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
 		return nil, err
@@ -83,4 +81,72 @@ func (c *Client) Do(method, path string, body interface{}) ([]byte, error) {
 	}
 
 	return data, nil
+}
+
+func (c *Client) DoJson(method, path string, body interface{}) ([]byte, error) {
+	req, err := c.getJsonRequest(method, path, body)
+	if err != nil {
+		return nil, err
+	}
+	return c.do(req)
+}
+
+func (c *Client) getFormRequest(method, path string, body interface{}) (*http.Request, error) {
+	fullurl, err := url.JoinPath(c.endpoint, path)
+	if err != nil {
+		return nil, err
+	}
+	buf := &bytes.Buffer{}
+	writer := multipart.NewWriter(buf)
+	if body != nil {
+		v := reflect.ValueOf(body).Elem()
+		typeOfv := v.Type()
+		for i := 0; i < v.NumField(); i++ {
+			field := v.Field(i)
+			key := typeOfv.Field(i).Name
+			val := field.Interface()
+			if typeOfv.Field(i).Tag.Get("form") != "" {
+				key = typeOfv.Field(i).Tag.Get("form")
+			}
+			switch value := val.(type) {
+			case int:
+				if value > 0 {
+					writer.WriteField(key, fmt.Sprintf("%d", value))
+				}
+			case int64:
+				if value > 0 {
+					writer.WriteField(key, fmt.Sprintf("%d", value))
+				}
+			case string:
+				if value != "" {
+					writer.WriteField(key, value)
+				}
+			case io.Reader:
+				if value != nil {
+					part, err := writer.CreateFormFile(key, key)
+					if err != nil {
+						return nil, err
+					}
+					io.Copy(part, value)
+				}
+			}
+
+		}
+		writer.Close()
+	}
+	req, err := http.NewRequest(method, fullurl, buf)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apikey))
+	return req, nil
+}
+
+func (c *Client) DoForm(method, path string, body interface{}) ([]byte, error) {
+	req, err := c.getFormRequest(method, path, body)
+	if err != nil {
+		return nil, err
+	}
+	return c.do(req)
 }

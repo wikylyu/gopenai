@@ -4,6 +4,7 @@ import (
 	"github.com/wikylyu/gopenai/client"
 	"github.com/wikylyu/gopenai/completions"
 	"github.com/wikylyu/gopenai/edits"
+	"github.com/wikylyu/gopenai/images"
 	"github.com/wikylyu/gopenai/models"
 )
 
@@ -12,4 +13,5 @@ type Session struct {
 	Model      *models.ModelClient
 	Completion *completions.CompletionClient
 	Edit       *edits.EditClient
+	Image      *images.ImagesClient
 }

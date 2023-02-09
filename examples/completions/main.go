@@ -14,7 +14,7 @@ func main() {
 	})
 
 	prompt := "Say this is a test"
-	resp, err := openai.Completion.Create(&completions.CreateCompletionRequest{
+	resp, err := openai.Completion.Create(&completions.CreateRequest{
 		Model:       "text-davinci-003",
 		Prompt:      prompt,
 		MaxTokens:   256,

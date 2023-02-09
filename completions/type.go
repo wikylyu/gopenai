@@ -2,7 +2,7 @@ package completions
 
 import "github.com/wikylyu/gopenai/client"
 
-type CreateCompletionRequest struct {
+type CreateRequest struct {
 	Model       string  `json:"model"`
 	Prompt      string  `json:"prompt"`
 	MaxTokens   int     `json:"max_tokens,omitempty"`
@@ -14,26 +14,26 @@ type CreateCompletionRequest struct {
 	Stop        string  `json:"stop,omitempty"`
 }
 
-type CompletionChoice struct {
+type Choice struct {
 	Text         string      `json:"text"`
 	Index        int         `json:"index"`
 	Logprobs     interface{} `json:"logprobs"`
 	FinishReason string      `json:"finish_reason"`
 }
 
-type CompletionUsage struct {
+type Usage struct {
 	PromptTokens     int `json:"prompt_tokens"`
 	CompletionTokens int `json:"completion_tokens"`
 	TotalTokens      int `json:"total_tokens"`
 }
 
-type CreateCompletionResponse struct {
-	ID      string              `json:"id"`
-	Object  string              `json:"object"`
-	Created int                 `json:"created"`
-	Model   string              `json:"model"`
-	Choices []*CompletionChoice `json:"choices"`
-	Usage   *CompletionUsage    `json:"usage"`
+type CreateResponse struct {
+	ID      string    `json:"id"`
+	Object  string    `json:"object"`
+	Created int       `json:"created"`
+	Model   string    `json:"model"`
+	Choices []*Choice `json:"choices"`
+	Usage   *Usage    `json:"usage"`
 }
 
 type CompletionClient struct {

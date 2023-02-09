@@ -27,7 +27,7 @@ type Model struct {
 	Permission []*Permission `json:"permission"`
 }
 
-type ListModelsResponse struct {
+type ListResponse struct {
 	Data   []*Model `json:"data"`
 	Object string   `json:"object"`
 }

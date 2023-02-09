@@ -6,12 +6,12 @@ import (
 	"github.com/wikylyu/gopenai/client"
 )
 
-func NewEditClient(c *client.Client) *EditClient {
+func NewClient(c *client.Client) *EditClient {
 	return &EditClient{c: c}
 }
 
 func (c *EditClient) Create(req *CreateEditRequest) (*CreateEditResponse, error) {
-	data, err := c.c.Do("POST", "/edits", req)
+	data, err := c.c.DoJson("POST", "/edits", req)
 	if err != nil {
 		return nil, err
 	}
