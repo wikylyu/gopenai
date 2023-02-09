@@ -6,6 +6,7 @@ import (
 
 	"github.com/wikylyu/gopenai"
 	"github.com/wikylyu/gopenai/completions"
+	"github.com/wikylyu/gopenai/models"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 
 	prompt := "Say this is a test"
 	resp, err := openai.Completion.Create(&completions.CreateRequest{
-		Model:       "text-davinci-003",
+		Model:       models.ModelTextDavinci003,
 		Prompt:      prompt,
 		MaxTokens:   256,
 		Temperature: 0,

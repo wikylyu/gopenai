@@ -6,6 +6,7 @@ import (
 
 	"github.com/wikylyu/gopenai"
 	"github.com/wikylyu/gopenai/edits"
+	"github.com/wikylyu/gopenai/models"
 )
 
 func main() {
@@ -14,7 +15,7 @@ func main() {
 	})
 
 	resp, err := openai.Edit.Create(&edits.CreateEditRequest{
-		Model:       "text-davinci-edit-001",
+		Model:       models.ModelTextDavinciEdit001,
 		Input:       "What day of the wek is it?",
 		Instruction: "Fix the spelling mistakes",
 	})

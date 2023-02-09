@@ -35,3 +35,26 @@ type ListResponse struct {
 type ModelClient struct {
 	c *client.Client
 }
+
+/*
+ * Some frequently-used model name
+ */
+const (
+	ModelAda                 = "ada"
+	ModelBabbage             = "babbage"
+	ModelDavinci             = "davinci"
+	ModelTextDavinci003      = "text-davinci-003"
+	ModelTextDavinci002      = "text-davinci-002"
+	ModelTextDavinci001      = "text-davinci-001"
+	ModelCurieInstructBeta   = "curie-instruct-beta"
+	ModelCodeCushman001      = "code-cushman-001"
+	ModelTextAda001          = "text-ada-001"
+	ModelTextCurie001        = "text-curie-001"
+	ModelCodeDavinci002      = "code-davinci-002"
+	ModelDavinciInstructBeta = "davinci-instruct-beta"
+	ModelTextBabbage001      = "text-babbage-001"
+	ModelCurie               = "curie"
+
+	ModelTextDavinciEdit001 = "text-davinci-edit-001"
+	ModelCodeDavinciEdit001 = "code-davinci-edit-001"
+)
