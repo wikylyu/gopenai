@@ -57,4 +57,6 @@ const (
 
 	ModelTextDavinciEdit001 = "text-davinci-edit-001"
 	ModelCodeDavinciEdit001 = "code-davinci-edit-001"
+
+	ModelTextEmbeddingAda002 = "text-embedding-ada-002"
 )
