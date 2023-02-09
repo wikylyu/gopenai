@@ -9,14 +9,14 @@ type CreateRequest struct {
 }
 
 type Usage struct {
-	PromptTokens int `json:"prompt_tokens"`
-	TotalTokens  int `json:"total_tokens"`
+	PromptTokens int64 `json:"prompt_tokens"`
+	TotalTokens  int64 `json:"total_tokens"`
 }
 
 type Embedding struct {
 	Object    string    `json:"object"`
 	Embedding []float64 `json:"embedding"`
-	Index     int       `json:"index"`
+	Index     int64     `json:"index"`
 }
 
 type CreateResponse struct {

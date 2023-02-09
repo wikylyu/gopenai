@@ -14,7 +14,7 @@ func main() {
 		ApiKey: os.Getenv("OPENAI_API_KEY"),
 	})
 
-	resp, err := openai.Edit.Create(&edits.CreateEditRequest{
+	resp, err := openai.Edit.Create(&edits.CreateRequest{
 		Model:       models.ModelTextDavinciEdit001,
 		Input:       "What day of the wek is it?",
 		Instruction: "Fix the spelling mistakes",

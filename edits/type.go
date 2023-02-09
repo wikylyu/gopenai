@@ -3,31 +3,31 @@ package edits
 import "github.com/wikylyu/gopenai/client"
 
 // https://platform.openai.com/docs/api-reference/edits/create
-type CreateEditRequest struct {
+type CreateRequest struct {
 	Model       string  `json:"model"`
 	Input       string  `json:"input"`
 	Instruction string  `json:"instruction"`
-	N           int     `json:"n,omitempty"`
+	N           int64   `json:"n,omitempty"`
 	Temperature float64 `json:"temperature,omitempty"`
 	TopP        float64 `json:"top_p,omitempty"`
 }
 
-type CreateEditChoice struct {
+type Choice struct {
 	Text  string `json:"text"`
-	Index int    `json:"index"`
+	Index int64  `json:"index"`
 }
 
-type CreateEditUsage struct {
-	PromptTokens     int `json:"prompt_tokens"`
-	CompletionTokens int `json:"completion_tokens"`
-	TotalTokens      int `json:"total_tokens"`
+type Usage struct {
+	PromptTokens     int64 `json:"prompt_tokens"`
+	CompletionTokens int64 `json:"completion_tokens"`
+	TotalTokens      int64 `json:"total_tokens"`
 }
 
-type CreateEditResponse struct {
-	Object  string              `json:"object"`
-	Created int                 `json:"created"`
-	Choices []*CreateEditChoice `json:"choices"`
-	Usage   *CreateEditUsage    `json:"usage"`
+type CreateResponse struct {
+	Object  string    `json:"object"`
+	Created int       `json:"created"`
+	Choices []*Choice `json:"choices"`
+	Usage   *Usage    `json:"usage"`
 }
 
 type EditClient struct {

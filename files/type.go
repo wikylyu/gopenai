@@ -6,7 +6,7 @@ import (
 	"github.com/wikylyu/gopenai/client"
 )
 
-type FilesClient struct {
+type FileClient struct {
 	c *client.Client
 }
 

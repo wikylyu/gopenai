@@ -19,7 +19,7 @@ func main() {
 		panic(err)
 	}
 	defer file.Close()
-	resp, err := openai.Files.Create(&files.CreateRequest{
+	resp, err := openai.File.Create(&files.CreateRequest{
 		File:    file,
 		Purpose: "fine-tune",
 	})
@@ -29,7 +29,7 @@ func main() {
 	fmt.Printf("uploaded: %s:%s\n", resp.ID, resp.Filename)
 	fmt.Printf("--------------------------------------------\n")
 
-	resp2, err := openai.Files.List()
+	resp2, err := openai.File.List()
 	if err != nil {
 		panic(err)
 	}
@@ -38,7 +38,7 @@ func main() {
 	}
 	fmt.Printf("--------------------------------------------\n")
 
-	resp3, err := openai.Files.Retrieve(resp.ID)
+	resp3, err := openai.File.Retrieve(resp.ID)
 	if err != nil {
 		panic(err)
 	}
@@ -47,7 +47,7 @@ func main() {
 	}
 
 	fmt.Printf("--------------------------------------------\n")
-	reader, err := openai.Files.Download(resp.ID)
+	reader, err := openai.File.Download(resp.ID)
 	if err != nil {
 		panic(err)
 	}

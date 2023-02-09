@@ -39,4 +39,11 @@ func main() {
 	for _, permission := range model.Permission {
 		fmt.Printf("permission id:\t%s\n", permission.ID)
 	}
+
+	// deletedModel, err := openai.Model.Delete("fine tuned model")
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Printf("model %s deleted\n", deletedModel.ID)
+
 }

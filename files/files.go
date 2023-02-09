@@ -7,14 +7,14 @@ import (
 	"github.com/wikylyu/gopenai/client"
 )
 
-func NewClient(c *client.Client) *FilesClient {
-	return &FilesClient{c: c}
+func NewClient(c *client.Client) *FileClient {
+	return &FileClient{c: c}
 }
 
 /*
  * Returns a list of files that belong to the user's organization.
  */
-func (c *FilesClient) List() (*ListResponse, error) {
+func (c *FileClient) List() (*ListResponse, error) {
 	data, err := c.c.DoJson("GET", "/files", nil)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func (c *FilesClient) List() (*ListResponse, error) {
  * Currently, the size of all the files uploaded by one organization can be up to 1 GB.
  * Please contact us if you need to increase the storage limit.
  */
-func (c *FilesClient) Create(req *CreateRequest) (*File, error) {
+func (c *FileClient) Create(req *CreateRequest) (*File, error) {
 	data, err := c.c.DoForm("POST", "/files", req)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (c *FilesClient) Create(req *CreateRequest) (*File, error) {
 /*
  * Delete a file.
  */
-func (c *FilesClient) Delete(id string) (*DeleteResponse, error) {
+func (c *FileClient) Delete(id string) (*DeleteResponse, error) {
 	data, err := c.c.DoJson("DELETE", "/files/"+id, nil)
 	if err != nil {
 		return nil, err
@@ -61,7 +61,7 @@ func (c *FilesClient) Delete(id string) (*DeleteResponse, error) {
 /*
  * Returns information about a specific file.
  */
-func (c *FilesClient) Retrieve(id string) (*File, error) {
+func (c *FileClient) Retrieve(id string) (*File, error) {
 	data, err := c.c.DoJson("GET", "/files/"+id, nil)
 	if err != nil {
 		return nil, err
@@ -76,7 +76,7 @@ func (c *FilesClient) Retrieve(id string) (*File, error) {
 /*
  * Returns the contents of the specified file
  */
-func (c *FilesClient) Download(id string) (io.ReadCloser, error) {
+func (c *FileClient) Download(id string) (io.ReadCloser, error) {
 	r, err := c.c.Download("/files/" + id + "/content")
 	if err != nil {
 		return nil, err

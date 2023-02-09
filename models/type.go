@@ -32,6 +32,12 @@ type ListResponse struct {
 	Object string   `json:"object"`
 }
 
+type DeleteResponse struct {
+	ID      string `json:"id"`
+	Object  string `json:"object"`
+	Deleted bool   `json:"deleted"`
+}
+
 type ModelClient struct {
 	c *client.Client
 }

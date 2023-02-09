@@ -8,7 +8,7 @@ import (
 
 type CreateRequest struct {
 	Prompt         string `json:"prompt"`
-	N              int    `json:"n,omitempty"`
+	N              int64  `json:"n,omitempty"`
 	Size           string `json:"size,omitempty"`
 	ResponseFormat string `json:"response_format,omitempty"` // url or b64_json
 	User           string `json:"user,omitempty"`
@@ -25,7 +25,7 @@ type CreateEditRequest struct {
 	Image          *os.File `json:"image" form:"image"`
 	Mask           *os.File `json:"mask" form:"mask"`
 	Prompt         string   `json:"prompt" form:"prompt"`
-	N              int      `json:"n,omitempty" form:"n"`
+	N              int64    `json:"n,omitempty" form:"n"`
 	Size           string   `json:"size,omitempty" form:"size"`
 	ResponseFormat string   `json:"response_format,omitempty" form:"response_format"` // url or b64_json
 	User           string   `json:"user,omitempty" form:"user"`
@@ -40,7 +40,7 @@ type CreateEditResponse struct {
 
 type CreateVariationRequest struct {
 	Image          *os.File `json:"image" form:"image"`
-	N              int      `json:"n,omitempty" form:"n"`
+	N              int64    `json:"n,omitempty" form:"n"`
 	Size           string   `json:"size,omitempty" form:"size"`
 	ResponseFormat string   `json:"response_format,omitempty" form:"response_format"` // url or b64_json
 	User           string   `json:"user,omitempty" form:"user"`
@@ -53,6 +53,6 @@ type CreateVariationResponse struct {
 	} `json:"data"`
 }
 
-type ImagesClient struct {
+type ImageClient struct {
 	c *client.Client
 }

@@ -13,13 +13,13 @@ func NewClient(c *client.Client) *EditClient {
 /*
  * Creates a new edit for the provided input, instruction, and parameters.
  */
-func (c *EditClient) Create(req *CreateEditRequest) (*CreateEditResponse, error) {
+func (c *EditClient) Create(req *CreateRequest) (*CreateResponse, error) {
 	data, err := c.c.DoJson("POST", "/edits", req)
 	if err != nil {
 		return nil, err
 	}
 
-	var resp CreateEditResponse
+	var resp CreateResponse
 	if err := json.Unmarshal(data, &resp); err != nil {
 		return nil, err
 	}

@@ -40,3 +40,18 @@ func (c *ModelClient) Retrieve(name string) (*Model, error) {
 	}
 	return &resp, nil
 }
+
+/*
+ * Delete a fine-tuned model. You must have the Owner role in your organization.
+ */
+func (c *ModelClient) Delete(id string) (*DeleteResponse, error) {
+	data, err := c.c.DoJson("DELETE", "/models/"+id, nil)
+	if err != nil {
+		return nil, err
+	}
+	var resp DeleteResponse
+	if err := json.Unmarshal(data, &resp); err != nil {
+		return nil, err
+	}
+	return &resp, nil
+}

@@ -44,6 +44,28 @@ func main() {
 
 ### For more usages, see ***examples/*** folder.
 
+## Error Handling
+
+There're two kinds of errors that api method may return.
+
+1. OpenAI api error
+2. Network or general error
+
+You can use following code to process errors.
+
+```golang
+
+resp,err:=openai.Completion.Create(...)
+if err!=nil{
+	if apierr:=err.(*client.Error);apierr!=nil{
+		/* OpenAI api error, read apierr.Message or apierr.Type to determine exact error reason */
+	}else {
+		/* Network error */
+	}
+}
+
+```
+
 
 ## API List
 
@@ -53,7 +75,7 @@ func main() {
 * [x] Images
 * [x] Embeddings
 * [x] Files
-* [ ] Fine-tunes
+* [x] Fine-tunes
 * [ ] Moderations
 * [ ] Engines
 
