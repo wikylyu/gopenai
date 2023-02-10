@@ -9,6 +9,7 @@ import (
 	"github.com/wikylyu/gopenai/finetunes"
 	"github.com/wikylyu/gopenai/images"
 	"github.com/wikylyu/gopenai/models"
+	"github.com/wikylyu/gopenai/moderations"
 )
 
 func New(cfg *Config) *Session {
@@ -22,5 +23,6 @@ func New(cfg *Config) *Session {
 		Embedding:  embeddings.NewClient(client),
 		File:       files.NewClient(client),
 		FineTune:   finetunes.NewClient(client),
+		Moderation: moderations.NewClient(client),
 	}
 }

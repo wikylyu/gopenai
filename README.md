@@ -76,7 +76,7 @@ if err!=nil{
 * [x] Embeddings
 * [x] Files
 * [x] Fine-tunes
-* [ ] Moderations
+* [x] Moderations
 * [ ] Engines
 
 ## Development

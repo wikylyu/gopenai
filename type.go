@@ -8,6 +8,7 @@ import (
 	"github.com/wikylyu/gopenai/finetunes"
 	"github.com/wikylyu/gopenai/images"
 	"github.com/wikylyu/gopenai/models"
+	"github.com/wikylyu/gopenai/moderations"
 )
 
 type Session struct {
@@ -19,4 +20,5 @@ type Session struct {
 	Embedding  *embeddings.EmbeddingClient
 	File       *files.FileClient
 	FineTune   *finetunes.FineTuneClient
+	Moderation *moderations.ModerationClient
 }
