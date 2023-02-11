@@ -14,7 +14,7 @@ func main() {
 		ApiKey: os.Getenv("OPENAI_API_KEY"),
 	})
 
-	prompt := "Say this is a test"
+	prompt := []string{"Say this is a test"}
 	resp, err := openai.Completion.Create(&completions.CreateRequest{
 		Model:       models.ModelTextDavinci003,
 		Prompt:      prompt,

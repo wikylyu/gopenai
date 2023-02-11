@@ -3,7 +3,7 @@ package images
 import (
 	"os"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 )
 
 type CreateRequest struct {
@@ -14,10 +14,11 @@ type CreateRequest struct {
 	User           string `json:"user,omitempty"`
 }
 
-type CreateResponse struct {
+type ImagesResponse struct {
 	Created int64 `json:"created"`
 	Data    []struct {
-		URL string `json:"url"`
+		URL     string `json:"url"`
+		B64Json string `json:"b64_json"`
 	} `json:"data"`
 }
 
@@ -31,13 +32,6 @@ type CreateEditRequest struct {
 	User           string   `json:"user,omitempty" form:"user"`
 }
 
-type CreateEditResponse struct {
-	Created int64 `json:"created"`
-	Data    []struct {
-		URL string `json:"url"`
-	} `json:"data"`
-}
-
 type CreateVariationRequest struct {
 	Image          *os.File `json:"image" form:"image"`
 	N              int64    `json:"n,omitempty" form:"n"`
@@ -46,13 +40,6 @@ type CreateVariationRequest struct {
 	User           string   `json:"user,omitempty" form:"user"`
 }
 
-type CreateVariationResponse struct {
-	Created int64 `json:"created"`
-	Data    []struct {
-		URL string `json:"url"`
-	} `json:"data"`
-}
-
 type ImageClient struct {
-	c *client.Client
+	c *api.Client
 }

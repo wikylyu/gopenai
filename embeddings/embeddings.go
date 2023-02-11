@@ -2,12 +2,12 @@ package embeddings
 
 import (
 	"encoding/json"
-	"fmt"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
+	"github.com/wikylyu/gopenai/base"
 )
 
-func NewClient(c *client.Client) *EmbeddingClient {
+func NewClient(c *api.Client) *EmbeddingClient {
 	return &EmbeddingClient{c: c}
 }
 
@@ -15,11 +15,8 @@ func NewClient(c *client.Client) *EmbeddingClient {
  * Creates an embedding vector representing the input text.
  */
 func (c *EmbeddingClient) Create(req *CreateRequest) (*CreateResponse, error) {
-	switch req.Input.(type) {
-	case string, []string:
-		break
-	default:
-		return nil, fmt.Errorf("input must be string or array")
+	if err := base.ValidateInput(req.Input); err != nil {
+		return nil, err
 	}
 	data, err := c.c.DoJson("POST", "/embeddings", req)
 	if err != nil {

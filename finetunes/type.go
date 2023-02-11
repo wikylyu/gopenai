@@ -1,12 +1,12 @@
 package finetunes
 
 import (
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 	"github.com/wikylyu/gopenai/files"
 )
 
 type FineTuneClient struct {
-	c *client.Client
+	c *api.Client
 }
 
 type CreateRequest struct {

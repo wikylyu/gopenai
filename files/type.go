@@ -3,20 +3,22 @@ package files
 import (
 	"os"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 )
 
 type FileClient struct {
-	c *client.Client
+	c *api.Client
 }
 
 type File struct {
-	ID        string `json:"id"`
-	Object    string `json:"object"`
-	Bytes     int64  `json:"bytes"`
-	CreatedAt int64  `json:"created_at"`
-	Filename  string `json:"filename"`
-	Purpose   string `json:"purpose"`
+	ID            string                 `json:"id"`
+	Object        string                 `json:"object"`
+	Bytes         int64                  `json:"bytes"`
+	CreatedAt     int64                  `json:"created_at"`
+	Filename      string                 `json:"filename"`
+	Purpose       string                 `json:"purpose"`
+	Status        string                 `json:"status"`
+	StatusDetails map[string]interface{} `json:"status_details"`
 }
 
 type ListResponse struct {

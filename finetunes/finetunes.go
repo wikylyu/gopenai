@@ -3,13 +3,11 @@ package finetunes
 import (
 	"encoding/json"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 )
 
-func NewClient(c *client.Client) *FineTuneClient {
-	return &FineTuneClient{
-		c: c,
-	}
+func NewClient(c *api.Client) *FineTuneClient {
+	return &FineTuneClient{c: c}
 }
 
 /*

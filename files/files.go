@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 )
 
-func NewClient(c *client.Client) *FileClient {
+func NewClient(c *api.Client) *FileClient {
 	return &FileClient{c: c}
 }
 

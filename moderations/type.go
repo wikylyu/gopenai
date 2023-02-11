@@ -1,9 +1,9 @@
 package moderations
 
-import "github.com/wikylyu/gopenai/client"
+import "github.com/wikylyu/gopenai/api"
 
 type ModerationClient struct {
-	c *client.Client
+	c *api.Client
 }
 
 type CreateRequest struct {

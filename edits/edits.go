@@ -3,10 +3,10 @@ package edits
 import (
 	"encoding/json"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 )
 
-func NewClient(c *client.Client) *EditClient {
+func NewClient(c *api.Client) *EditClient {
 	return &EditClient{c: c}
 }
 

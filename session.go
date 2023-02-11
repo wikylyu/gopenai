@@ -1,7 +1,7 @@
 package gopenai
 
 import (
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 	"github.com/wikylyu/gopenai/completions"
 	"github.com/wikylyu/gopenai/edits"
 	"github.com/wikylyu/gopenai/embeddings"
@@ -13,9 +13,8 @@ import (
 )
 
 func New(cfg *Config) *Session {
-	client := client.NewClient(cfg.Endpoint, cfg.ApiKey)
+	client := api.NewClient(cfg.Endpoint, cfg.ApiKey)
 	return &Session{
-		// c:          client,
 		Model:      models.NewClient(client),
 		Completion: completions.NewClient(client),
 		Edit:       edits.NewClient(client),

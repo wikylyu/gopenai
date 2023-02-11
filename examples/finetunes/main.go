@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/wikylyu/gopenai"
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 	"github.com/wikylyu/gopenai/files"
 	"github.com/wikylyu/gopenai/finetunes"
 )
@@ -82,7 +82,7 @@ func cancel() {
 	for _, ft := range resp.Data {
 		finetune, err := openai.FineTune.Cancel(ft.ID)
 		if err != nil {
-			if apierr := err.(*client.Error); apierr != nil {
+			if apierr := err.(*api.Error); apierr != nil {
 				fmt.Printf("%s:%s\n", apierr.Type, apierr.Code)
 				continue
 			} else {

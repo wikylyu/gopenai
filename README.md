@@ -1,9 +1,12 @@
 # GOpenAI
 
-Go implemention for [OpenAI API](https://platform.openai.com/docs/api-reference/introduction)
+Unofficial Go implemention for [OpenAI API](https://platform.openai.com/docs/api-reference/introduction), adhering to their official [OpenAPI spec](https://github.com/openai/openai-openapi/blob/master/openapi.yaml).
 
-GOpenAPI provides their official python-like api. 
+GOpenAI provides their python-style like api. It's easy to understand and use.
 
+* openai.Completion.Create(...)
+* openai.Edit.Create(...)
+* ...
 
 ## Usage
 
@@ -18,6 +21,7 @@ import (
 
 	"github.com/wikylyu/gopenai"
 	"github.com/wikylyu/gopenai/completions"
+	"github.com/wikylyu/gopenai/models"
 )
 
 func main() {
@@ -25,9 +29,9 @@ func main() {
 		ApiKey: os.Getenv("OPENAI_API_KEY"),
 	})
 
-	prompt := "Say this is a test"
+	prompt := []string{"Say this is a test"}
 	resp, err := openai.Completion.Create(&completions.CreateRequest{
-		Model:       "text-davinci-003",
+		Model:       models.ModelTextDavinci003,
 		Prompt:      prompt,
 		MaxTokens:   256,
 		Temperature: 0,
@@ -57,7 +61,7 @@ You can use following code to process errors.
 
 resp,err:=openai.Completion.Create(...)
 if err!=nil{
-	if apierr:=err.(*client.Error);apierr!=nil{
+	if apierr:=err.(*api.Error);apierr!=nil{
 		/* OpenAI api error, read apierr.Message or apierr.Type to determine exact error reason */
 	}else {
 		/* Network error */

@@ -3,10 +3,11 @@ package completions
 import (
 	"encoding/json"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
+	"github.com/wikylyu/gopenai/base"
 )
 
-func NewClient(c *client.Client) *CompletionClient {
+func NewClient(c *api.Client) *CompletionClient {
 	return &CompletionClient{c: c}
 }
 
@@ -14,6 +15,10 @@ func NewClient(c *client.Client) *CompletionClient {
  * Creates a completion for the provided prompt and parameters
  */
 func (c *CompletionClient) Create(req *CreateRequest) (*CreateResponse, error) {
+	if err := base.ValidatePrompt(req.Prompt); err != nil {
+		return nil, err
+	}
+
 	data, err := c.c.DoJson("POST", "/completions", req)
 	if err != nil {
 		return nil, err

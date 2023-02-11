@@ -1,6 +1,6 @@
 package models
 
-import "github.com/wikylyu/gopenai/client"
+import "github.com/wikylyu/gopenai/api"
 
 type Permission struct {
 	ID                 string      `json:"id"`
@@ -39,7 +39,7 @@ type DeleteResponse struct {
 }
 
 type ModelClient struct {
-	c *client.Client
+	c *api.Client
 }
 
 /*

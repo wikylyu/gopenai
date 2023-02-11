@@ -1,16 +1,14 @@
 package embeddings
 
-import "github.com/wikylyu/gopenai/client"
+import (
+	"github.com/wikylyu/gopenai/api"
+	"github.com/wikylyu/gopenai/base"
+)
 
 type CreateRequest struct {
 	Model string      `json:"model"`
 	Input interface{} `json:"input"` // string or []string
 	User  string      `json:"user,omitempty"`
-}
-
-type Usage struct {
-	PromptTokens int64 `json:"prompt_tokens"`
-	TotalTokens  int64 `json:"total_tokens"`
 }
 
 type Embedding struct {
@@ -20,13 +18,13 @@ type Embedding struct {
 }
 
 type CreateResponse struct {
-	Object string `json:"object"`
-	Model  string `json:"model"`
-	Usage  *Usage `json:"usage"`
+	Object string      `json:"object"`
+	Model  string      `json:"model"`
+	Usage  *base.Usage `json:"usage"`
 
 	Data []*Embedding `json:"data"`
 }
 
 type EmbeddingClient struct {
-	c *client.Client
+	c *api.Client
 }

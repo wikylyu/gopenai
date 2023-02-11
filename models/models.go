@@ -3,10 +3,10 @@ package models
 import (
 	"encoding/json"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 )
 
-func NewClient(c *client.Client) *ModelClient {
+func NewClient(c *api.Client) *ModelClient {
 	return &ModelClient{c: c}
 }
 

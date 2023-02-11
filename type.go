@@ -12,7 +12,6 @@ import (
 )
 
 type Session struct {
-	// c          *client.Client
 	Model      *models.ModelClient
 	Completion *completions.CompletionClient
 	Edit       *edits.EditClient

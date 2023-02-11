@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/wikylyu/gopenai/client"
+	"github.com/wikylyu/gopenai/api"
 )
 
-func NewClient(c *client.Client) *ModerationClient {
+func NewClient(c *api.Client) *ModerationClient {
 	return &ModerationClient{c: c}
 }
 
