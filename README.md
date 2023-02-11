@@ -7,7 +7,7 @@ GOpenAPI provides their official python-like api.
 
 ## Usage
 
-### create completion
+### Create Completion
 
 ```golang
 package main
@@ -81,4 +81,4 @@ if err!=nil{
 
 ## Development
 
-This project is in development.
+[Engines](https://platform.openai.com/docs/api-reference/engines) is not going to be implemented, cause it's deprecated. [Models](https://platform.openai.com/docs/api-reference/models) is their replacement.
