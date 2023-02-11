@@ -1,4 +1,6 @@
 # GOpenAI
+[![GoDoc](http://img.shields.io/badge/GoDoc-Reference-blue.svg)](https://pkg.go.dev/github.com/wikylyu/gopenai)
+[![Go Report Card](https://goreportcard.com/badge/github.com/wikylyu/gopenai)](https://goreportcard.com/report/github.com/wikylyu/gopenai)
 
 Unofficial Go implemention for [OpenAI API](https://platform.openai.com/docs/api-reference/introduction), adhering to their official [OpenAPI spec](https://github.com/openai/openai-openapi/blob/master/openapi.yaml).
 
