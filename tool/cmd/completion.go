@@ -45,6 +45,7 @@ var completionCreateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		params := completionCreateParams
 		if params.Model == "" {
+			cmd.Help()
 			fmt.Printf("model is required\n")
 			return
 		}
@@ -77,12 +78,7 @@ var completionCreateCmd = &cobra.Command{
 			fmt.Printf("error: %v\n", err)
 			return
 		}
-		result, err := json.MarshalIndent(r, "", "  ")
-		if err != nil {
-			fmt.Printf("error: %v\n", err)
-			return
-		}
-		fmt.Printf("%v\n", string(result))
+		printJson(r)
 	},
 }
 
