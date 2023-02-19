@@ -8,7 +8,7 @@ It's very convenient for testing.
 
 ### Create Completion
 ```shell
-OPENAI_API_KEY=yourkey gopenai completion create --model=...
+OPENAI_API_KEY=yourkey gopenai completion create --model=text-davinci-003 --prompt="Say this is a test" --max-tokens=200
 ```
 ### List Models
 ```

@@ -37,10 +37,6 @@ var retriveModelCmd = &cobra.Command{
 	Long: "Retrieves a model instance, providing basic information about the model such as the owner and permissioning.",
 	Run: func(cmd *cobra.Command, args []string) {
 		model := retriveModelParams.Model
-		if model == "" {
-			cmd.Help()
-			return
-		}
 		r, err := openai.Model.Retrieve(model)
 		if err != nil {
 			fmt.Printf("error: %v\n", err)
@@ -59,10 +55,6 @@ var deleteModelCmd = &cobra.Command{
 	Long: "Delete a fine-tuned model. You must have the Owner role in your organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		model := deleteModelParams.Model
-		if model == "" {
-			cmd.Help()
-			return
-		}
 		r, err := openai.Model.Delete(model)
 		if err != nil {
 			fmt.Printf("error: %v\n", err)
@@ -73,8 +65,11 @@ var deleteModelCmd = &cobra.Command{
 }
 
 func init() {
-	retriveModelCmd.PersistentFlags().StringVarP(&retriveModelParams.Model, "model", "m", "", "The ID of the model to use for this request")
-	deleteModelCmd.PersistentFlags().StringVarP(&deleteModelParams.Model, "model", "m", "", "The model to delete")
+	retriveModelCmd.PersistentFlags().StringVarP(&retriveModelParams.Model, "model", "m", "", "[required] The ID of the model to use for this request")
+	retriveModelCmd.MarkPersistentFlagRequired("model")
+
+	deleteModelCmd.PersistentFlags().StringVarP(&deleteModelParams.Model, "model", "m", "", "[required] The model to delete")
+	deleteModelCmd.MarkPersistentFlagRequired("model")
 
 	ModelCmd.AddCommand(listModelCmd, retriveModelCmd, deleteModelCmd)
 
