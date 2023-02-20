@@ -27,8 +27,8 @@ for more details
 
 * [x] Model
 * [x] Completion
-* [ ] Edit
-* [ ] Images
+* [x] Edit
+* [x] Images
 * [ ] Embeddings
 * [ ] Files
 * [ ] Fine-tunes
