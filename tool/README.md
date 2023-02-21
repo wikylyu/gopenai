@@ -29,7 +29,7 @@ for more details
 * [x] Completion
 * [x] Edit
 * [x] Images
-* [ ] Embeddings
+* [x] Embeddings
 * [ ] Files
 * [ ] Fine-tunes
 * [ ] Moderations
