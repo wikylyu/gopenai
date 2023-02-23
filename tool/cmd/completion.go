@@ -3,6 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/wikylyu/gopenai/completions"
@@ -70,7 +71,7 @@ var completionCreateCmd = &cobra.Command{
 			User:             params.User,
 		})
 		if err != nil {
-			fmt.Printf("error: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			return
 		}
 		printJson(r)

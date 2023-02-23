@@ -2,14 +2,16 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/wikylyu/gopenai/embeddings"
 )
 
 var EmbeddingCmd = &cobra.Command{
-	Use:  "embedding",
-	Long: "Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.",
+	Use:   "embedding",
+	Short: "Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.",
+	Long:  "Get a vector representation of a given input that can be easily consumed by machine learning models and algorithms.",
 
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -23,8 +25,9 @@ var embeddingCreateParam struct {
 }
 
 var embeddingCreateCmd = &cobra.Command{
-	Use:  "create",
-	Long: "Creates an embedding vector representing the input text.",
+	Use:   "create",
+	Short: "Creates an embedding vector representing the input text.",
+	Long:  "Creates an embedding vector representing the input text.",
 	Run: func(cmd *cobra.Command, args []string) {
 		model := embeddingCreateParam.Model
 		input := embeddingCreateParam.Input
@@ -36,7 +39,7 @@ var embeddingCreateCmd = &cobra.Command{
 			User:  user,
 		})
 		if err != nil {
-			fmt.Printf("error: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			return
 		}
 		printJson(r)

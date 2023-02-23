@@ -2,14 +2,16 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/spf13/cobra"
 	"github.com/wikylyu/gopenai/edits"
 )
 
 var EditCmd = &cobra.Command{
-	Use:  "edit",
-	Long: "Given a prompt and an instruction, the model will return an edited version of the prompt.",
+	Use:   "edit",
+	Short: "Given a prompt and an instruction, the model will return an edited version of the prompt.",
+	Long:  "Given a prompt and an instruction, the model will return an edited version of the prompt.",
 
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
@@ -26,8 +28,9 @@ var createEditParams struct {
 }
 
 var createEditCmd = &cobra.Command{
-	Use:  "create",
-	Long: "Creates a new edit for the provided input, instruction, and parameters.",
+	Use:   "create",
+	Short: "Creates a new edit for the provided input, instruction, and parameters.",
+	Long:  "Creates a new edit for the provided input, instruction, and parameters.",
 	Run: func(cmd *cobra.Command, args []string) {
 		model := createEditParams.Model
 		input := createEditParams.Input
@@ -44,7 +47,7 @@ var createEditCmd = &cobra.Command{
 			TopP:        topP,
 		})
 		if err != nil {
-			fmt.Printf("error: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			return
 		}
 		printJson(r)

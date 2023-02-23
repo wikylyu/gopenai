@@ -9,8 +9,9 @@ import (
 )
 
 var ImageCommand = &cobra.Command{
-	Use:  "image",
-	Long: "Given a prompt and/or an input image, the model will generate a new image.",
+	Use:   "image",
+	Short: "Given a prompt and/or an input image, the model will generate a new image.",
+	Long:  "Given a prompt and/or an input image, the model will generate a new image.",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},
@@ -25,8 +26,9 @@ var imageCreateParams struct {
 }
 
 var imageCreateCommand = &cobra.Command{
-	Use:  "create",
-	Long: "Creates an image given a prompt.",
+	Use:   "create",
+	Short: "Creates an image given a prompt.",
+	Long:  "Creates an image given a prompt.",
 	Run: func(cmd *cobra.Command, args []string) {
 		prompt := imageCreateParams.Prompt
 		n := imageCreateParams.N
@@ -41,7 +43,7 @@ var imageCreateCommand = &cobra.Command{
 			User:           user,
 		})
 		if err != nil {
-			fmt.Printf("error: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			return
 		}
 		printJson(r)
@@ -59,8 +61,9 @@ var imageCreateEditParams struct {
 }
 
 var imageCreateEditCommand = &cobra.Command{
-	Use:  "create-edit",
-	Long: "Creates an edited or extended image given an original image and a prompt.",
+	Use:   "create-edit",
+	Short: "Creates an edited or extended image given an original image and a prompt.",
+	Long:  "Creates an edited or extended image given an original image and a prompt.",
 	Run: func(cmd *cobra.Command, args []string) {
 		image := imageCreateEditParams.Image
 		mask := imageCreateEditParams.Mask
@@ -75,13 +78,15 @@ var imageCreateEditCommand = &cobra.Command{
 
 		imageFile, err = os.Open(image)
 		if err != nil {
-			fmt.Printf("open file error: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			return
 		}
 		if mask != "" {
 			maskFile, err = os.Open(mask)
-			fmt.Printf("open file error: %v\n", err)
-			return
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "error: %v\n", err)
+				return
+			}
 		}
 
 		r, err := openai.Image.CreateEdit(&images.CreateEditRequest{
@@ -110,8 +115,9 @@ var imageCreateVariationParams struct {
 }
 
 var imageCreateVariationCommand = &cobra.Command{
-	Use:  "create-variation",
-	Long: "Creates a variation of a given image.",
+	Use:   "create-variation",
+	Short: "Creates a variation of a given image.",
+	Long:  "Creates a variation of a given image.",
 	Run: func(cmd *cobra.Command, args []string) {
 		image := imageCreateVariationParams.Image
 		n := imageCreateVariationParams.N
@@ -121,7 +127,7 @@ var imageCreateVariationCommand = &cobra.Command{
 
 		imageFile, err := os.Open(image)
 		if err != nil {
-			fmt.Printf("open file error: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			return
 		}
 
@@ -133,7 +139,7 @@ var imageCreateVariationCommand = &cobra.Command{
 			User:           user,
 		})
 		if err != nil {
-			fmt.Printf("error: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			return
 		}
 		printJson(r)
