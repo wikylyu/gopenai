@@ -15,33 +15,41 @@ import (
 )
 
 type Client struct {
-	endpoint string
-	apikey   string
+	baseurl string
+	apikey  string
 
 	httpClient *http.Client
 }
 
-const DefaultEndpoint = "https://api.openai.com/v1"
+const DefaultBaseURL = "https://api.openai.com/v1"
 
-func NewClient(endpoint, apikey string) *Client {
+func NewClient(baseurl, apikey string, maxIdleConns int, idleConnTimeout time.Duration) *Client {
+
+	if baseurl == "" {
+		baseurl = DefaultBaseURL
+	}
+	if maxIdleConns <= 0 {
+		maxIdleConns = 10
+	}
+	if idleConnTimeout <= 0 {
+		idleConnTimeout = 30 * time.Second
+	}
+
 	tr := &http.Transport{
-		MaxIdleConns:    10,
-		IdleConnTimeout: 30 * time.Second,
+		MaxIdleConns:    maxIdleConns,
+		IdleConnTimeout: idleConnTimeout,
 	}
 	c := &Client{
-		endpoint:   endpoint,
+		baseurl:    baseurl,
 		apikey:     apikey,
 		httpClient: &http.Client{Transport: tr},
-	}
-	if c.endpoint == "" {
-		c.endpoint = DefaultEndpoint
 	}
 
 	return c
 }
 
 func (c *Client) getJsonRequest(method, path string, body interface{}) (*http.Request, error) {
-	fullurl, err := url.JoinPath(c.endpoint, path)
+	fullurl, err := url.JoinPath(c.baseurl, path)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +126,7 @@ func (c *Client) DoJson(method, path string, body interface{}) ([]byte, error) {
 }
 
 func (c *Client) getFormRequest(method, path string, body interface{}) (*http.Request, error) {
-	fullurl, err := url.JoinPath(c.endpoint, path)
+	fullurl, err := url.JoinPath(c.baseurl, path)
 	if err != nil {
 		return nil, err
 	}

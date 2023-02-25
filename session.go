@@ -13,7 +13,7 @@ import (
 )
 
 func New(cfg *Config) *Session {
-	client := api.NewClient(cfg.Endpoint, cfg.ApiKey)
+	client := api.NewClient(cfg.BaseURL, cfg.ApiKey, cfg.MaxIdleConns, cfg.IdleConnTimeout)
 	return &Session{
 		Model:      models.NewClient(client),
 		Completion: completions.NewClient(client),

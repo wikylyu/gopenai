@@ -1,6 +1,10 @@
 package gopenai
 
+import "time"
+
 type Config struct {
-	Endpoint string // openai api endpoint, optional
-	ApiKey   string // api key, required
+	BaseURL         string // openai api endpoint, optional
+	ApiKey          string // api key, required
+	MaxIdleConns    int
+	IdleConnTimeout time.Duration
 }
