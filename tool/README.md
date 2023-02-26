@@ -31,5 +31,5 @@ for more details
 * [x] Images
 * [x] Embeddings
 * [x] Files
-* [ ] Fine-tunes
+* [x] Fine-tunes
 * [x] Moderations
