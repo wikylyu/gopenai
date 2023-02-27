@@ -13,7 +13,7 @@ type CreateRequest struct {
 	TrainingFile                 string    `json:"training_file"`
 	ValidationFile               string    `json:"validation_file,omitempty"`
 	Model                        string    `json:"model,omitempty"`
-	NEpochs                      int64     `json:"NEpochs,omitempty"`
+	NEpochs                      int64     `json:"n_epochs,omitempty"`
 	BatchSize                    int64     `json:"batch_size,omitempty"`
 	LearningRateMultiplier       float64   `json:"learning_rate_multiplier,omitempty"`
 	PromptLossWeight             float64   `json:"prompt_loss_weight,omitempty"`

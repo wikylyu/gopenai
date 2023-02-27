@@ -7,15 +7,17 @@ It's very convenient for testing.
 ## Build
 
 ```shell
-go build
+make build
 ```
+
+It will build executable file located in ./bin/gopenai.
 
 ## Install
 
 Run following command in tool directory.
 
 ```shell
-go install
+make install
 ```
 
 It will install gopenai to GOPATH/bin.
