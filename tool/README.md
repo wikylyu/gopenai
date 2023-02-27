@@ -41,13 +41,31 @@ gopenai --help
 ```
 for more details
 
-## Development
+## Features
 
 * [x] Model
+  * [x] Create
+  * [x] Retrieve
+  * [x] Delete
 * [x] Completion
+  * [x] Create
 * [x] Edit
+  * [x] Create
 * [x] Images
+  * [x] Create
+  * [x] Edit
+  * [x] Variation
 * [x] Embeddings
+  * [x] Create
 * [x] Files
+  * [x] Create
+  * [x] Retrieve
+  * [x] Download
 * [x] Fine-tunes
+  * [x] Create
+  * [x] Retrieve
+  * [x] List
+  * [x] Cancel
+  * [x] Events
 * [x] Moderations
+  * [x] Create
