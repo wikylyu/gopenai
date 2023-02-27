@@ -4,6 +4,22 @@ This is a Command line tool built with GOpenAI, it allows you to call OpenAI api
 
 It's very convenient for testing.
 
+## Build
+
+```shell
+go build
+```
+
+## Install
+
+Run following command in tool directory.
+
+```shell
+go install
+```
+
+It will install gopenai to GOPATH/bin.
+
 ## Usage
 
 ### Create Completion
