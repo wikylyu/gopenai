@@ -10,6 +10,7 @@ var openai *gopenai.Session = nil
 
 func init() {
 	openai = gopenai.New(&gopenai.Config{
-		ApiKey: os.Getenv("OPENAI_API_KEY"),
+		ApiKey:     os.Getenv("OPENAI_API_KEY"),
+		HttpsProxy: os.Getenv("https_proxy"),
 	})
 }

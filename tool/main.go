@@ -18,7 +18,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(
 		cmd.CompletionCmd, cmd.ModelCmd, cmd.EditCmd, cmd.ImageCommand, cmd.EmbeddingCmd,
-		cmd.FileCmd, cmd.ModerationCmd, cmd.FineTuneCmd, cmd.ChatCommand,
+		cmd.FileCmd, cmd.ModerationCmd, cmd.FineTuneCmd, cmd.ChatCommand, cmd.AudioCmd,
 	)
 }
 

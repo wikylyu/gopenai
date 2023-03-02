@@ -2,6 +2,7 @@ package gopenai
 
 import (
 	"github.com/wikylyu/gopenai/api"
+	"github.com/wikylyu/gopenai/audio"
 	"github.com/wikylyu/gopenai/chat"
 	"github.com/wikylyu/gopenai/completions"
 	"github.com/wikylyu/gopenai/edits"
@@ -14,7 +15,7 @@ import (
 )
 
 func New(cfg *Config) *Session {
-	client := api.NewClient(cfg.BaseURL, cfg.ApiKey, cfg.MaxIdleConns, cfg.IdleConnTimeout)
+	client := api.NewClient(cfg.BaseURL, cfg.ApiKey, cfg.MaxIdleConns, cfg.IdleConnTimeout, cfg.HttpsProxy)
 	return &Session{
 		Model:      models.NewClient(client),
 		Completion: completions.NewClient(client),
@@ -25,5 +26,6 @@ func New(cfg *Config) *Session {
 		FineTune:   finetunes.NewClient(client),
 		Moderation: moderations.NewClient(client),
 		Chat:       chat.NewClient(client),
+		Audio:      audio.NewClient(client),
 	}
 }

@@ -23,7 +23,7 @@ type Client struct {
 
 const DefaultBaseURL = "https://api.openai.com/v1"
 
-func NewClient(baseurl, apikey string, maxIdleConns int, idleConnTimeout time.Duration) *Client {
+func NewClient(baseurl, apikey string, maxIdleConns int, idleConnTimeout time.Duration, httpsProxy string) *Client {
 
 	if baseurl == "" {
 		baseurl = DefaultBaseURL
@@ -38,6 +38,14 @@ func NewClient(baseurl, apikey string, maxIdleConns int, idleConnTimeout time.Du
 	tr := &http.Transport{
 		MaxIdleConns:    maxIdleConns,
 		IdleConnTimeout: idleConnTimeout,
+	}
+
+	/* setup http proxy */
+	if httpsProxy != "" {
+		proxyUrl, _ := url.Parse(httpsProxy)
+		if proxyUrl != nil {
+			tr.Proxy = http.ProxyURL(proxyUrl)
+		}
 	}
 	c := &Client{
 		baseurl:    baseurl,
@@ -150,6 +158,10 @@ func (c *Client) getFormRequest(method, path string, body interface{}) (*http.Re
 			case int64:
 				if value > 0 {
 					writer.WriteField(key, fmt.Sprintf("%d", value))
+				}
+			case float64:
+				if value > 0 {
+					writer.WriteField(key, fmt.Sprintf("%f", value))
 				}
 			case string:
 				if value != "" {

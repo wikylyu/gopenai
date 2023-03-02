@@ -1,6 +1,7 @@
 package gopenai
 
 import (
+	"github.com/wikylyu/gopenai/audio"
 	"github.com/wikylyu/gopenai/chat"
 	"github.com/wikylyu/gopenai/completions"
 	"github.com/wikylyu/gopenai/edits"
@@ -22,4 +23,5 @@ type Session struct {
 	FineTune   *finetunes.FineTuneClient
 	Moderation *moderations.ModerationClient
 	Chat       *chat.ChatClient
+	Audio      *audio.AudioClient
 }

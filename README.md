@@ -72,6 +72,11 @@ if err!=nil{
 
 ```
 
+### Command line tool
+
+
+See **[tool/](https://github.com/wikylyu/gopenai/tree/main/tool)** folder for more details.
+
 
 ## API List
 
@@ -91,6 +96,9 @@ if err!=nil{
   * [x] Variation
 * [x] Embeddings
   * [x] Create
+* [x] Audio
+  * [x] Transcribe
+  * [x] Translate
 * [x] Files
   * [x] Create
   * [x] Retrieve

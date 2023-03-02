@@ -7,4 +7,5 @@ type Config struct {
 	ApiKey          string // api key, required
 	MaxIdleConns    int
 	IdleConnTimeout time.Duration
+	HttpsProxy      string
 }

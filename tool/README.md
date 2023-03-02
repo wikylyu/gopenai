@@ -64,6 +64,9 @@ for more details
   * [x] Variation
 * [x] Embeddings
   * [x] Create
+* [x] Audio
+  * [x] Transcribe
+  * [x] Translate
 * [x] Files
   * [x] Create
   * [x] Retrieve
