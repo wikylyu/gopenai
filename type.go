@@ -1,6 +1,7 @@
 package gopenai
 
 import (
+	"github.com/wikylyu/gopenai/chat"
 	"github.com/wikylyu/gopenai/completions"
 	"github.com/wikylyu/gopenai/edits"
 	"github.com/wikylyu/gopenai/embeddings"
@@ -20,4 +21,5 @@ type Session struct {
 	File       *files.FileClient
 	FineTune   *finetunes.FineTuneClient
 	Moderation *moderations.ModerationClient
+	Chat       *chat.ChatClient
 }

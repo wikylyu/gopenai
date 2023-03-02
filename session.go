@@ -2,6 +2,7 @@ package gopenai
 
 import (
 	"github.com/wikylyu/gopenai/api"
+	"github.com/wikylyu/gopenai/chat"
 	"github.com/wikylyu/gopenai/completions"
 	"github.com/wikylyu/gopenai/edits"
 	"github.com/wikylyu/gopenai/embeddings"
@@ -23,5 +24,6 @@ func New(cfg *Config) *Session {
 		File:       files.NewClient(client),
 		FineTune:   finetunes.NewClient(client),
 		Moderation: moderations.NewClient(client),
+		Chat:       chat.NewClient(client),
 	}
 }

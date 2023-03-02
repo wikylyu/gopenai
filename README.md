@@ -81,6 +81,8 @@ if err!=nil{
   * [x] Delete
 * [x] Completion
   * [x] Create
+* [x] Chat
+  * [x] Create
 * [x] Edit
   * [x] Create
 * [x] Images

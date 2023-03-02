@@ -29,8 +29,13 @@ It will install gopenai to GOPATH/bin.
 OPENAI_API_KEY=yourkey gopenai completion create --model=text-davinci-003 --prompt="Say this is a test" --max-tokens=200
 ```
 ### List Models
-```
+```shell
 OPENAI_API_KEY=yourkey gopenai model list
+```
+
+### Chat
+```shell
+gopenai chat create -m 'gpt-3.5-turbo' --messages "[{\"role\":\"user\",\"content\":\"Who are you?\"}]"
 ```
 
 ### More
@@ -48,6 +53,8 @@ for more details
   * [x] Retrieve
   * [x] Delete
 * [x] Completion
+  * [x] Create
+* [x] Chat
   * [x] Create
 * [x] Edit
   * [x] Create
