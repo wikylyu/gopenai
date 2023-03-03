@@ -35,7 +35,7 @@ OPENAI_API_KEY=yourkey gopenai model list
 
 ### Chat
 ```shell
-gopenai chat create -m 'gpt-3.5-turbo' --messages "[{\"role\":\"user\",\"content\":\"Who are you?\"}]"
+OPENAI_API_KEY=yourkey gopenai chat create -m 'gpt-3.5-turbo' --messages "[{\"role\":\"user\",\"content\":\"Who are you?\"}]"
 ```
 
 ### More
