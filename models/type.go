@@ -67,4 +67,11 @@ const (
 	ModelTextEmbeddingAda002 = "text-embedding-ada-002"
 
 	ModelTextModeration001 = "text-moderation-001"
+
+	ModelGPT4              = "gpt-4"
+	ModelGPT4_0314         = "gpt-4-0314"
+	ModelGPT4_32K          = "gpt-4-32k"
+	ModelGPT4_32K_0314     = "gpt-4-32k-0314"
+	ModelGPT3_5_Turbo      = "gpt-3.5-turbo"
+	ModelGPT3_5_Turbo_0301 = "gpt-3.5-turbo-0301"
 )
