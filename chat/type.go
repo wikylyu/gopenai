@@ -14,6 +14,7 @@ const (
 type Message struct {
 	Role    string `json:"role"`
 	Content string `json:"content"`
+	Name    string `json:"name"`
 }
 
 type CreateRequest struct {
