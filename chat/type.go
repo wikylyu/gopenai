@@ -1,6 +1,10 @@
 package chat
 
 import (
+	"bufio"
+	"net/http"
+	"strings"
+
 	"github.com/wikylyu/gopenai/api"
 	"github.com/wikylyu/gopenai/base"
 )
@@ -14,7 +18,7 @@ const (
 type Message struct {
 	Role    string `json:"role"`
 	Content string `json:"content"`
-	Name    string `json:"name"`
+	Name    string `json:"name,omitempty"`
 }
 
 type CreateRequest struct {
@@ -48,4 +52,27 @@ type CreateResponse struct {
 
 type ChatClient struct {
 	c *api.Client
+}
+
+type StreamChoice struct {
+	Delta struct {
+		Content string `json:"content"`
+	} `json:"delta"`
+	Index        int64  `json:"index"`
+	FinishReason string `json:"stop"`
+}
+
+type StreamResponse struct {
+	ID      string          `json:"id"`
+	Object  string          `json:"object"`
+	Model   string          `json:"model"`
+	Created int64           `json:"created"`
+	Choices []*StreamChoice `json:"choices"`
+}
+
+type ChatStreamer struct {
+	resp   *http.Response
+	reader *bufio.Reader
+
+	buf strings.Builder
 }

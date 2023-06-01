@@ -101,6 +101,14 @@ func (c *Client) do(req *http.Request) ([]byte, error) {
 	return data, nil
 }
 
+func (c *Client) doResp(req *http.Request) (*http.Response, error) {
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
 func (c *Client) Download(path string) (io.ReadCloser, error) {
 	req, err := c.getJsonRequest("GET", path, nil)
 	if err != nil {
@@ -131,6 +139,17 @@ func (c *Client) DoJson(method, path string, body interface{}) ([]byte, error) {
 		return nil, err
 	}
 	return c.do(req)
+}
+
+func (c *Client) DoStream(method, path string, body interface{}) (*http.Response, error) {
+	req, err := c.getJsonRequest(method, path, body)
+	req.Header.Set("Accept", "text/event-stream")
+	req.Header.Set("Cache-Control", "no-cache")
+	req.Header.Set("Connection", "keep-alive")
+	if err != nil {
+		return nil, err
+	}
+	return c.doResp(req)
 }
 
 func (c *Client) getFormRequest(method, path string, body interface{}) (*http.Request, error) {
