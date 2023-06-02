@@ -63,7 +63,7 @@ var chatCreateCommand = &cobra.Command{
 			return
 		}
 
-		r, err := openai.Chat.Create(&chat.CreateRequest{
+		req := &chat.CreateRequest{
 			Model:            model,
 			Messages:         messagesData,
 			Temperature:      temperature,
@@ -76,12 +76,34 @@ var chatCreateCommand = &cobra.Command{
 			User:             user,
 			LogitBias:        logitBiasMap,
 			MaxTokens:        maxTokens,
-		})
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
-			return
 		}
-		printJson(r)
+
+		if !req.Stream {
+			r, err := openai.Chat.Create(req)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "error: %v\n", err)
+				return
+			}
+			printJson(r)
+		} else {
+			streamer, err := openai.Chat.CreateStream(req)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "error: %v\n", err)
+				return
+			}
+			defer streamer.Close()
+			for {
+				r, err := streamer.Read()
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "error: %v\n", err)
+					break
+				} else if r == nil {
+					break
+				}
+				fmt.Printf("%s", r.Content())
+			}
+			fmt.Printf("\n")
+		}
 	},
 }
 

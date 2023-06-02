@@ -70,6 +70,16 @@ type StreamResponse struct {
 	Choices []*StreamChoice `json:"choices"`
 }
 
+func (r *StreamResponse) Content() string {
+	var content string
+	for _, choice := range r.Choices {
+		if choice.Delta.Content != "" {
+			content += choice.Delta.Content
+		}
+	}
+	return content
+}
+
 type ChatStreamer struct {
 	resp   *http.Response
 	reader *bufio.Reader

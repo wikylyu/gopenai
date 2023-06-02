@@ -5,13 +5,15 @@ import (
 	"os"
 
 	"github.com/wikylyu/gopenai"
+	"github.com/wikylyu/gopenai/api"
 	"github.com/wikylyu/gopenai/chat"
 	"github.com/wikylyu/gopenai/models"
 )
 
 func main() {
 	openai := gopenai.New(&gopenai.Config{
-		ApiKey: os.Getenv("OPENAI_API_KEY"),
+		ApiKey:  os.Getenv("OPENAI_API_KEY"),
+		BaseURL: "http://43.154.167.208/v1",
 	})
 
 	streamer, err := openai.Chat.CreateStream(&chat.CreateRequest{
@@ -32,6 +34,10 @@ func main() {
 	for {
 		resp, err := streamer.Read()
 		if err != nil {
+			if apierr := err.(*api.Error); apierr != nil {
+				fmt.Printf("API Error: %v %v", apierr.Code, apierr.Message)
+				break
+			}
 			panic(err)
 		} else if resp == nil { // EOF
 			break

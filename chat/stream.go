@@ -3,7 +3,9 @@ package chat
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	"io"
+
+	"github.com/wikylyu/gopenai/api"
 )
 
 func (s *ChatStreamer) Close() error {
@@ -23,7 +25,16 @@ read:
 		goto read
 	}
 	if !bytes.HasPrefix(line, headerData) {
-		return nil, fmt.Errorf("invalid data")
+		all, err := io.ReadAll(s.reader)
+		if err != nil {
+			return nil, err
+		}
+		line = append(line, all...)
+		var apierr api.ErrorResponse
+		if err := json.Unmarshal(line, &apierr); err != nil {
+			return nil, err
+		}
+		return nil, &apierr.Error
 	}
 
 	line = bytes.TrimPrefix(line, headerData)
