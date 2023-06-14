@@ -68,10 +68,14 @@ const (
 
 	ModelTextModeration001 = "text-moderation-001"
 
-	ModelGPT4              = "gpt-4"
-	ModelGPT4_0314         = "gpt-4-0314"
-	ModelGPT4_32K          = "gpt-4-32k"
-	ModelGPT4_32K_0314     = "gpt-4-32k-0314"
-	ModelGPT3_5_Turbo      = "gpt-3.5-turbo"
-	ModelGPT3_5_Turbo_0301 = "gpt-3.5-turbo-0301"
+	ModelGPT4                  = "gpt-4"
+	ModelGPT4_0314             = "gpt-4-0314"
+	ModelGPT4_32K              = "gpt-4-32k"
+	ModelGPT4_32K_0314         = "gpt-4-32k-0314"
+	ModelGPT4_0613             = "gpt-4-0613"
+	ModelGPT4_32K_0613         = "gpt-4-32k-0613"
+	ModelGPT3_5_Turbo          = "gpt-3.5-turbo"
+	ModelGPT3_5_Turbo_0301     = "gpt-3.5-turbo-0301"
+	ModelGPT3_5_Turbo_16K      = "gpt-3.5-turbo-16k"
+	ModelGPT3_5_Turbo_16K_0613 = "gpt-3.5-turbo-16k-0613"
 )
